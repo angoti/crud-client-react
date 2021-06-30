@@ -1,24 +1,49 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
+import LoginControl from "./components/LoginControl"
+import Home from "./components/Home"
+import Categorias from "./components/Categorias"
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <nav className="container navbar navbar-expand navbar-dark bg-dark">
+        <h1 className="navbar-brand my-auto">
+          Sistema e-commerce
+        </h1>
+        <div className="navbar-nav me-auto">
+          <li className="nav-item">
+            <Link to="/categorias" className="nav-link">
+              Categorias
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/" className="nav-link">
+              Home
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/" className="nav-link">
+              Home
+            </Link>
+          </li>
+        </div>
+        <div className="text-white">
+          <LoginControl isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+        </div>
+      </nav>
+
+      <div className="container mt-3 px-0">
+        <Switch>
+          <Route path="/categorias" component={Categorias} />
+          <Route path="/" component={Home} />
+        </Switch>
+      </div>
+    </BrowserRouter>
   );
 }
 
